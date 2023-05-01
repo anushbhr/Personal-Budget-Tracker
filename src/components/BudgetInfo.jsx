@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 function BudgetInfo() {
-  const [totalBuget, setTotalBudget] = useState();
+  const [totalBuget, setTotalBudget] = useState(0);
   const [editable, setEditable] = useState(false);
 
   const list = useSelector((state) => state.budgetList.dataList);
@@ -33,10 +33,7 @@ function BudgetInfo() {
         )}
       </div>
       <div>
-        Remaining: ₹{totalBuget - totalExpenseCost}
-        {/* {totalExpenseCost > 0 && totalBuget > totalExpenseCost
-          ? totalBuget - totalExpenseCost
-          : 0} */}
+        Remaining: ₹{totalExpenseCost ? totalBuget - totalExpenseCost : 0}
       </div>
       <div>Spent so far: ₹{totalExpenseCost}</div>
     </div>
