@@ -1,10 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {
-  listReducer,
-  searchTerm,
-  addExpense,
-  removeExpense,
-} from "./slices/listSlice";
+import { listReducer, addToList, removeFromList } from "./slices/listSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,4 +7,4 @@ const store = configureStore({
   },
 });
 
-export { store, searchTerm, addExpense, removeExpense };
+export { store, addToList, removeFromList };

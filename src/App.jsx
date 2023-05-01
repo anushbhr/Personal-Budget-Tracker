@@ -1,13 +1,13 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import Form from "./components/Form";
-import BudgetList from "./components/BudgetList";
+import ExpensesList from "./components/ExpensesList";
 import BudgetInfo from "./components/BudgetInfo";
+import "./App.css";
+
 function App() {
   return (
-    <div>
+    <div className="container">
       <BudgetInfo />
-      <BudgetList />
+      <ExpensesList />
       <Form />
     </div>
   );

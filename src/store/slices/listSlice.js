@@ -1,24 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "@reduxjs/toolkit";
 
 const listSlice = createSlice({
   name: "list",
   initialState: {
-    searchInput: "",
-    cars: [],
+    dataList: [],
   },
   reducers: {
-    searchTerm(state, action) {
-      state.searchInput = action.payload;
+    addToList(state, action) {
+      state.dataList.push({
+        id: nanoid(),
+        name: action.payload.name,
+        cost: action.payload.cost,
+      });
     },
-    addExpense(state, action) {
-      state.push(action.payload);
-    },
-    removeExpense(state, action) {
-      const updated = state.filter((ele) => ele.id !== action.payload);
-      state.cars = updated;
+    removeFromList(state, action) {
+      const updatedList = state.dataList.filter(
+        (ele) => ele.id !== action.payload
+      );
+      state.dataList = updatedList;
     },
   },
 });
 
-export const { searchTerm, addExpense, removeExpense } = listSlice.actions;
+export const { addToList, removeFromList } = listSlice.actions;
 export const listReducer = listSlice.reducer;

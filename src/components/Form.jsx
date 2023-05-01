@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { addExpense } from "../store";
+import { addToList } from "../store";
 
 function Form() {
   const [name, setName] = useState("");
@@ -13,22 +12,32 @@ function Form() {
   };
 
   const handleCostChange = (event) => {
-    setCost(event.target.value);
+    setCost(parseInt(event.target.value) || 0); // if the value is NaN, set it to 0
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addExpense({ id: nanoid(), name: name, cost: cost }));
+    dispatch(addToList({ name, cost }));
+    setName("");
+    setCost(0);
   };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <h3>Add Expense</h3>
-      <label>Name</label>
-      <input type="text" value={name} onChange={handleNameChange} />
-      <label>Cost</label>
-      <input type="number" value={cost} onChange={handleCostChange} />
-      <button type="submit">Save</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <label>Name</label>
+        <input id="name" type="text" value={name} onChange={handleNameChange} />
+        <label>Cost</label>
+        <input
+          id="cost"
+          type="number"
+          value={cost || ""}
+          onChange={handleCostChange}
+        />
+        <button type="submit">Save</button>
+      </form>
+    </>
   );
 }
 
